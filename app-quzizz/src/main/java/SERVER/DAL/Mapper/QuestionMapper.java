@@ -26,6 +26,7 @@ public class QuestionMapper implements RowMapper<QuestionDTO>{
             q.setC(rs.getNString("C"));
             q.setD(rs.getNString("D"));
             q.setAnswer(rs.getString("answer"));
+            q.setType(rs.getInt("type"));
             return q;
         } catch (SQLException e) {
             return null;

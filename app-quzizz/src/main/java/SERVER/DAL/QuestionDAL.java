@@ -24,12 +24,13 @@ public class QuestionDAL extends AbstractDAL<QuestionDTO> {
     }
 
     public Integer save(QuestionDTO question) throws FileNotFoundException {
-        StringBuilder sql = new StringBuilder("INSERT INTO questions(exam_id,question,A,B,C,D,answer)");
-        sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?)");
+        StringBuilder sql = new StringBuilder("INSERT INTO questions(exam_id,question,A,B,C,D,answer,type)");
+        sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?,?)");
         return insert(sql.toString(), question.getExamID(),
                 question.getQuestion(), question.getA(), 
                 question.getB(), question.getC(),
-                question.getD(), question.getAnswer());
+                question.getD(), question.getAnswer(),
+                question.getType());
     }
 
     public List<QuestionDTO> findAll() {

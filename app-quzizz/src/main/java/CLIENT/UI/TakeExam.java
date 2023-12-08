@@ -10,7 +10,6 @@ import CLIENT.DTO.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -138,13 +138,6 @@ public class TakeExam extends javax.swing.JPanel {
                     } catch (Exception ex) {
                         throw new RuntimeException(ex);
                     }
-                }
-
-                try {
-                    System.out.println("EXAM ID: " + exam.getId());
-                    System.out.println("USER ID: " + user.getId());
-                } catch (Exception e1) {
-                    e1.printStackTrace();
                 }
                 
                 if(listEx1 == null || listEx1.isEmpty()){
@@ -272,7 +265,7 @@ public class TakeExam extends javax.swing.JPanel {
             float time = this.myresult.getTime_doing();
             myresult.setPoint((float) Math.round(((correct_num * 10) / this.amount_Question) * 10) / 10);
             myresult.setTime_doing((exam.getTotal_time() * 60000) - TimeExam);
-            if(listEx1 != null || !listEx1.isEmpty()){
+            if(listEx1 != null){
                 System.out.println("CO VAO DAY");
                 myresult.setTime_doing((exam.getTotal_time() * 60000) - TimeExam + listEx1.get(0).getTime_doing());
             }
@@ -291,7 +284,6 @@ public class TakeExam extends javax.swing.JPanel {
     private void showQuestion(int pos) {
         QuestionDTO question;
         ArrayList<QuestionDTO> res = QuestionBLL.getListQuestion();
-        res.forEach(que -> System.out.println(que));
         try {
             if (pos < res.size()) {
                 question = res.get(pos);
@@ -302,61 +294,52 @@ public class TakeExam extends javax.swing.JPanel {
                 txtC.setText(question.getC());
                 txtD.setText(question.getD());
             }
+            if(pos == amount_Question){
+                return;
+            }
+            if(res.get(pos).getType() == 1){
+                rbA.setVisible(true);
+                rbB.setVisible(true);
+                rbC.setVisible(true);
+                rbD.setVisible(true);
+                chkA.setVisible(false);
+                chkB.setVisible(false);
+                chkC.setVisible(false);
+                chkD.setVisible(false);
+                
+            } else {
+                rbA.setVisible(false);
+                rbB.setVisible(false);
+                rbC.setVisible(false);
+                rbD.setVisible(false);
+                chkA.setVisible(true);
+                chkB.setVisible(true);
+                chkC.setVisible(true);
+                chkD.setVisible(true);
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("OUT OF BOUND");
         }
     }
 
-    private boolean checkAnswer(String res) {
-        return (res.equals(QuestionBLL.getListQuestion().get(positionQuetion).getAnswer()));
-    }
+//    private boolean checkAnswer(String res) {
+//        return (res.equals(QuestionBLL.getListQuestion().get(positionQuetion).getAnswer()));
+//    }
     
     //HÀM KIỂM TRA ĐÁP ÁN VÀ LƯU VÀO MY-RESULT
     private void checkAnswerQuestion() {
-        // System.out.println("vi tri hien tai:"+positionQuetion+ " So luong cau hoi: "+amount_Question);
-        // thông báo đúng sai
-        Color red = new Color(208, 53, 95);
-        Color green = new Color(103, 215, 156);
-        Border borderRed = new LineBorder(red, 5, true);
-        Border borderGreen = new LineBorder(green, 5, true);
-
+        System.out.println("vi tri hien tai:"+positionQuetion+ " So luong cau hoi: "+amount_Question);
         String ans = QuestionBLL.getListQuestion().get(positionQuetion).getAnswer();
-        if (ans.equals(this.answerChosen)) {
+        if (ans.contains(this.answerChosen)) {
             myresult.setAmount_correct(myresult.getAmount_correct() + 1); 
-            lbNotifyResult.setBounds(45, 45, 210, 200);
-            lbNotifyResult.setText("Chính Xác ");
-            lbNotifyResult.setBackground(new Color(71, 153, 129));
-            lbNotifyResult.setForeground(Color.WHITE);
-            lbNotifyResult.setVisible(true);
+           
         } else {
-            myresult.setAmount_incorrect(myresult.getAmount_incorrect() + 1);
-            lbNotifyResult.setText("Sai Rồi ");
-            lbNotifyResult.setBackground(new Color(133, 5, 33));
-            lbNotifyResult.setForeground(Color.WHITE);
-            lbNotifyResult.setVisible(true);
-        }
-
-        switch (ans) {
-            case "A":
-                //setBackgroundAnswer("A", red, green, borderRed, borderGreen);
-                break;
-            case "B":
-                //setBackgroundAnswer("B", red, green, borderRed, borderGreen);
-                break;
-            case "C":
-                //setBackgroundAnswer("C", red, green, borderRed, borderGreen);
-                break;
-            case "D":
-                //setBackgroundAnswer("D", red, green, borderRed, borderGreen);
-                break;
-            default:
-                break;
+            myresult.setAmount_incorrect(myresult.getAmount_incorrect() + 1);    
         }
         // luu kết quả và tính hạng
         if (positionQuetion + 1 == amount_Question) {
             // luu diem va tinh sank
             saveResultExam();
-            
             // dừng thi và thông bao kết quả
             finishExam();
         }
@@ -400,6 +383,10 @@ public class TakeExam extends javax.swing.JPanel {
         rbB.setSelected(false);
         rbC.setSelected(false);
         rbD.setSelected(false);
+        chkA.setSelected(false);
+        chkB.setSelected(false);
+        chkC.setSelected(false);
+        chkD.setSelected(false);
     }
 
     /**
@@ -459,6 +446,10 @@ public class TakeExam extends javax.swing.JPanel {
         lbSerialImg = new javax.swing.JLabel();
         lbCounterTimer = new javax.swing.JLabel();
         lbIconClock = new javax.swing.JLabel();
+        chkA = new javax.swing.JCheckBox();
+        chkB = new javax.swing.JCheckBox();
+        chkC = new javax.swing.JCheckBox();
+        chkD = new javax.swing.JCheckBox();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -876,6 +867,38 @@ public class TakeExam extends javax.swing.JPanel {
         lbCounterTimer.setFont(new java.awt.Font("Segoe UI", 1, 30)); // NOI18N
         lbCounterTimer.setForeground(new java.awt.Color(204, 0, 0));
 
+        chkA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkA.setText("A");
+        chkA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkAActionPerformed(evt);
+            }
+        });
+
+        chkB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkB.setText("B");
+        chkB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkBActionPerformed(evt);
+            }
+        });
+
+        chkC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkC.setText("C");
+        chkC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkCActionPerformed(evt);
+            }
+        });
+
+        chkD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkD.setText("D");
+        chkD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pInputLayout = new javax.swing.GroupLayout(pInput);
         pInput.setLayout(pInputLayout);
         pInputLayout.setHorizontalGroup(
@@ -883,24 +906,6 @@ public class TakeExam extends javax.swing.JPanel {
             .addGroup(pInputLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbA)
-                            .addComponent(rbB)
-                            .addComponent(rbD)
-                            .addComponent(rbC))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtB)
-                            .addComponent(txtA)
-                            .addComponent(txtC)
-                            .addComponent(txtD))
-                        .addGap(18, 18, 18)
-                        .addComponent(lbNotifyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66)
-                        .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pInputLayout.createSequentialGroup()
                         .addComponent(lbSerialImg, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -917,6 +922,35 @@ public class TakeExam extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(txtQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 862, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())))
+            .addGroup(pInputLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pInputLayout.createSequentialGroup()
+                        .addComponent(rbA)
+                        .addGap(18, 18, 18)
+                        .addComponent(chkA))
+                    .addGroup(pInputLayout.createSequentialGroup()
+                        .addComponent(rbB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkB))
+                    .addGroup(pInputLayout.createSequentialGroup()
+                        .addComponent(rbD)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkD))
+                    .addGroup(pInputLayout.createSequentialGroup()
+                        .addComponent(rbC)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkC)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtB)
+                    .addComponent(txtA)
+                    .addComponent(txtC)
+                    .addComponent(txtD))
+                .addGap(18, 18, 18)
+                .addComponent(lbNotifyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66)
+                .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pInputLayout.setVerticalGroup(
             pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -940,25 +974,32 @@ public class TakeExam extends javax.swing.JPanel {
                     .addGroup(pInputLayout.createSequentialGroup()
                         .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pInputLayout.createSequentialGroup()
-                                .addGap(100, 100, 100)
-                                .addComponent(rbC)
-                                .addGap(17, 17, 17)
-                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(rbD)
-                                    .addComponent(txtD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pInputLayout.createSequentialGroup()
-                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(rbA)
-                                    .addComponent(jLabel1))
-                                .addGap(20, 20, 20)
-                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(rbB)
-                                    .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(pInputLayout.createSequentialGroup()
                                 .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(66, 66, 66)
                                 .addComponent(txtC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbNotifyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbNotifyResult, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pInputLayout.createSequentialGroup()
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addGap(100, 100, 100)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rbC)
+                                            .addComponent(chkC)))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rbA)
+                                            .addComponent(jLabel1)
+                                            .addComponent(chkA))
+                                        .addGap(20, 20, 20)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(rbB)
+                                            .addComponent(txtB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(chkB))))
+                                .addGap(17, 17, 17)
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(rbD)
+                                    .addComponent(txtD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chkD))))
                         .addGap(20, 20, 20))))
         );
 
@@ -1027,7 +1068,9 @@ public class TakeExam extends javax.swing.JPanel {
     }
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         this.checkAnswerQuestion();
-        if ((grAnswer.getSelection() != null)) {
+        if ((grAnswer.getSelection() != null) || 
+                (chkA.isSelected() || chkB.isSelected() || chkC.isSelected() || chkD.isSelected())
+           ) {
             this.clearBackgroundAnswer();
             this.clearSelectedAnswer();
             this.positionQuetion = this.positionQuetion + 1;
@@ -1094,6 +1137,110 @@ public class TakeExam extends javax.swing.JPanel {
         notipn.setVisible(true);
     }//GEN-LAST:event_btnResultActionPerformed
 
+    private void chkAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkAActionPerformed
+        if(chkA.isSelected()){
+            if(this.answerChosen.equals("")){
+                this.answerChosen = "A";
+            } else {
+                answerChosen += "A";
+            }
+        } else {
+            if(!this.answerChosen.equals("")){
+               answerChosen = answerChosen.replace("A", "");
+            }
+        }
+        
+        if(answerChosen.length() >= 2){
+            char[] answerCharsArray = answerChosen.toCharArray();
+            Arrays.sort(answerCharsArray);
+            String newAns = "";
+            for(char c : answerCharsArray){
+                newAns += c;
+            }
+            answerChosen = newAns;
+        }
+        
+        System.out.println("ANSWER CHOOSEN: " + answerChosen);
+    }//GEN-LAST:event_chkAActionPerformed
+
+    private void chkBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkBActionPerformed
+        if(chkB.isSelected()){
+            if(this.answerChosen.equals("")){
+                this.answerChosen = "B";
+            } else {
+                answerChosen += "B";
+            }
+        } else {
+            if(!this.answerChosen.equals("")){
+                answerChosen = answerChosen.replaceAll("B", "");
+            }
+        }
+        
+        if(answerChosen.length() >= 2){
+            char[] answerCharsArray = answerChosen.toCharArray();
+            Arrays.sort(answerCharsArray);
+            String newAns = "";
+            for(char c : answerCharsArray){
+                newAns += c;
+            }
+            answerChosen = newAns;
+        }
+        
+        System.out.println("ANSWER CHOOSEN: " + answerChosen);
+    }//GEN-LAST:event_chkBActionPerformed
+
+    private void chkCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkCActionPerformed
+        if(chkC.isSelected()){
+            if(this.answerChosen.equals("")){
+                this.answerChosen = "C";
+            } else {
+                answerChosen += "C";
+            }
+        } else {
+            if(!this.answerChosen.equals("")){
+                answerChosen = answerChosen.replaceAll("C", "");
+            }
+        }
+        
+        if(answerChosen.length() >= 2){
+            char[] answerCharsArray = answerChosen.toCharArray();
+            Arrays.sort(answerCharsArray);
+            String newAns = "";
+            for(char c : answerCharsArray){
+                newAns += c;
+            }
+            answerChosen = newAns;
+        }
+        
+        System.out.println("ANSWER CHOOSEN: " + answerChosen);
+    }//GEN-LAST:event_chkCActionPerformed
+
+    private void chkDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkDActionPerformed
+        if(chkD.isSelected()){
+            if(this.answerChosen.equals("")){
+                this.answerChosen = "D";
+            } else {
+                answerChosen += "D";
+            }
+        } else {
+            if(!this.answerChosen.equals("")){
+                answerChosen = answerChosen.replaceAll("D", "");
+            }
+        }
+        
+        if(answerChosen.length() >= 2){
+            char[] answerCharsArray = answerChosen.toCharArray();
+            Arrays.sort(answerCharsArray);
+            String newAns = "";
+            for(char c : answerCharsArray){
+                newAns += c;
+            }
+            answerChosen = newAns;
+        }
+        
+        System.out.println("ANSWER CHOOSEN: " + answerChosen);
+    }//GEN-LAST:event_chkDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HEADER;
@@ -1102,6 +1249,10 @@ public class TakeExam extends javax.swing.JPanel {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnResult;
+    private javax.swing.JCheckBox chkA;
+    private javax.swing.JCheckBox chkB;
+    private javax.swing.JCheckBox chkC;
+    private javax.swing.JCheckBox chkD;
     private javax.swing.ButtonGroup grAnswer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

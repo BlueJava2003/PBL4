@@ -49,18 +49,25 @@ public class CreateExam extends javax.swing.JPanel {
         init();
     }
       private void init(){
-          txID.setText(exam.getId().toString());
-          txClassRoom.setText(exam.getClass_room());
-          txQuantity.setText(String.valueOf(exam.getQuantity()));
-          txSubject.setText(exam.getSubject());
-          txTime.setText(String.valueOf(exam.getTotal_time()));
-          txUser.setText(String.valueOf(exam.getUserID()));
-        
-          txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion));
-          txtOptionAnswerA.setActionCommand("A");
+        txID.setText(exam.getId().toString());
+        txClassRoom.setText(exam.getClass_room());
+        txQuantity.setText(String.valueOf(exam.getQuantity()));
+        txSubject.setText(exam.getSubject());
+        txTime.setText(String.valueOf(exam.getTotal_time()));
+        txUser.setText(String.valueOf(exam.getUserID()));
+
+        txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion));
+        txtOptionAnswerA.setActionCommand("A");
         txtOptionAnswerB.setActionCommand("B");
         txtOptionAnswerC.setActionCommand("C");
         txtOptionAnswerD.setActionCommand("D");
+        
+        chkOptionAnswerA.setVisible(false);
+        chkOptionAnswerB.setVisible(false);
+        chkOptionAnswerC.setVisible(false);
+        chkOptionAnswerD.setVisible(false);
+        
+        
         btnComplete.setVisible(false);
         if(listQuestion.size()<1) btnPrevQuestion.setVisible(false);
       }
@@ -103,6 +110,12 @@ public class CreateExam extends javax.swing.JPanel {
         txtSerialQuestion = new javax.swing.JTextField();
         pInput4 = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
+        cbbAnswer = new javax.swing.JComboBox<>();
+        jLabel15 = new javax.swing.JLabel();
+        chkOptionAnswerA = new javax.swing.JCheckBox();
+        chkOptionAnswerB = new javax.swing.JCheckBox();
+        chkOptionAnswerC = new javax.swing.JCheckBox();
+        chkOptionAnswerD = new javax.swing.JCheckBox();
         pButton = new javax.swing.JPanel();
         btnPrevQuestion = new javax.swing.JButton();
         btnNextQuestion = new javax.swing.JButton();
@@ -250,12 +263,34 @@ public class CreateExam extends javax.swing.JPanel {
             }
         });
 
+        cbbAnswer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Một đáp án", "Nhiều đáp án" }));
+        cbbAnswer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbAnswerActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("Loại câu hỏi");
+
+        chkOptionAnswerA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerA.setText("A");
+
+        chkOptionAnswerB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerB.setText("B");
+
+        chkOptionAnswerC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerC.setText("C");
+
+        chkOptionAnswerD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerD.setText("D");
+
         javax.swing.GroupLayout pInputLayout = new javax.swing.GroupLayout(pInput);
         pInput.setLayout(pInputLayout);
         pInputLayout.setHorizontalGroup(
             pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
-                .addContainerGap(79, Short.MAX_VALUE)
+                .addContainerGap(76, Short.MAX_VALUE)
                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(pInputLayout.createSequentialGroup()
@@ -286,14 +321,30 @@ public class CreateExam extends javax.swing.JPanel {
                                     .addComponent(btnSave))
                                 .addGap(32, 32, 32)
                                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtOptionAnswerA)
-                                    .addComponent(txtOptionAnswerB)
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(txtOptionAnswerA)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chkOptionAnswerA))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(txtOptionAnswerB)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chkOptionAnswerB))
                                     .addGroup(pInputLayout.createSequentialGroup()
                                         .addComponent(txtOptionAnswerD)
                                         .addGap(18, 18, 18)
-                                        .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtOptionAnswerC)))
-                            .addComponent(txtSerialQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(chkOptionAnswerD)))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(txtOptionAnswerC)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chkOptionAnswerC))))
+                            .addGroup(pInputLayout.createSequentialGroup()
+                                .addComponent(txtSerialQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72)
+                                .addComponent(jLabel15)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)))))
         );
         pInputLayout.setVerticalGroup(
@@ -306,8 +357,12 @@ public class CreateExam extends javax.swing.JPanel {
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtSerialQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtSerialQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -325,21 +380,27 @@ public class CreateExam extends javax.swing.JPanel {
                             .addComponent(jLabel6)
                             .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(txtAnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtOptionAnswerC)))
+                                .addComponent(txtOptionAnswerC)
+                                .addComponent(chkOptionAnswerC)))
                         .addGap(20, 20, 20)
                         .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(txtOptionAnswerD))
+                            .addComponent(txtOptionAnswerD)
+                            .addComponent(chkOptionAnswerD))
                         .addGap(35, 35, 35)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
                     .addGroup(pInputLayout.createSequentialGroup()
                         .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pInputLayout.createSequentialGroup()
-                                .addComponent(txtOptionAnswerA)
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtOptionAnswerA)
+                                    .addComponent(chkOptionAnswerA))
                                 .addGap(23, 23, 23)
-                                .addComponent(txtOptionAnswerB))
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtOptionAnswerB)
+                                    .addComponent(chkOptionAnswerB)))
                             .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -535,9 +596,51 @@ public class CreateExam extends javax.swing.JPanel {
        String anB=txtAnswerB.getText();
        String anC=txtAnswerC.getText();
        String anD=txtAnswerD.getText();
-       String answer=(txtOptionAnswerA.isSelected())?"A":(
+       String answer = "";
+       if(cbbAnswer.getSelectedItem().toString().equals("Một đáp án")){
+            answer=(txtOptionAnswerA.isSelected())?"A":(
                (txtOptionAnswerB.isSelected())?"B":((txtOptionAnswerC.isSelected())?"C":"D"));
+       } else {
+            if(chkOptionAnswerA.isSelected()){
+                answer = "A";
+            }
+            if(chkOptionAnswerB.isSelected()){
+                answer = "B";
+            }
+            if(chkOptionAnswerC.isSelected()){
+                answer = "C";
+            }
+            if(chkOptionAnswerD.isSelected()){
+                answer = "D";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerB.isSelected()){
+                answer = "AB";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerC.isSelected()){
+                answer = "AC";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerD.isSelected()){
+                answer = "AD";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerB.isSelected() && chkOptionAnswerC.isSelected()){
+                answer = "ABC";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerB.isSelected() && chkOptionAnswerD.isSelected()){
+                answer = "ABD";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerC.isSelected() && chkOptionAnswerD.isSelected()){
+                answer = "ACD";
+            }
+            if(chkOptionAnswerA.isSelected() && chkOptionAnswerB.isSelected() && chkOptionAnswerC.isSelected() && chkOptionAnswerD.isSelected()){
+                answer = "ABCD";
+            }
+       }
        QuestionDTO question =new  QuestionDTO();
+       if(cbbAnswer.getSelectedItem().toString().equals("Một đáp án")){
+           question.setType(1);
+       } else {
+           question.setType(2);
+       }
        question.setExamID(exam.getId());
        question.setQuestion(quesName);
        question.setA(anA);
@@ -545,8 +648,8 @@ public class CreateExam extends javax.swing.JPanel {
        question.setC(anC);
        question.setD(anD);
        question.setAnswer(answer);
+        System.out.println("TYPE: " + question.getType());
         if(flag==2 )
-
            listQuestion.set(currentPostitionQuestion,question);
         else {
             listQuestion.add(question);  
@@ -556,33 +659,91 @@ public class CreateExam extends javax.swing.JPanel {
           System.out.println("total"+listQuestion.size()+"---"+currentPostitionQuestion);
     }
     public void getQuestionFromArray(int index){
-         QuestionDTO instantQs=listQuestion.get(index-1);
+       QuestionDTO instantQs=listQuestion.get(index-1);
+       if(instantQs.getType() == 1) {
+           cbbAnswer.setSelectedItem("Một đáp án");
+       } else {
+           cbbAnswer.setSelectedItem("Nhiều đáp án");
+       }
        txtQuestion.setText(instantQs.getQuestion());
        txtAnswerA.setText(instantQs.getA());
        txtAnswerB.setText(instantQs.getB());
        txtAnswerC.setText(instantQs.getC());
        txtAnswerD.setText(instantQs.getD());
+       chkOptionAnswerA.setSelected(false);
+       chkOptionAnswerB.setSelected(false);
+       chkOptionAnswerC.setSelected(false);
+       chkOptionAnswerD.setSelected(false);
+       
        String answer = instantQs.getAnswer();
-         if (answer.equalsIgnoreCase("A"))
-             txtOptionAnswerA.setSelected(true);
-         else if (answer.equalsIgnoreCase("B"))
-             txtOptionAnswerB.setSelected(true);
-         else if (answer.equalsIgnoreCase("C"))
-             txtOptionAnswerC.setSelected(true);
-         else
-             txtOptionAnswerD.setSelected(true);
+       if(instantQs.getType() == 1){   
+        if (answer.equalsIgnoreCase("A"))
+            txtOptionAnswerA.setSelected(true);
+        else if (answer.equalsIgnoreCase("B"))
+            txtOptionAnswerB.setSelected(true);
+        else if (answer.equalsIgnoreCase("C"))
+            txtOptionAnswerC.setSelected(true);
+        else
+            txtOptionAnswerD.setSelected(true);
+       } else {
+            if(answer.equalsIgnoreCase("A")){
+                chkOptionAnswerA.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("B")){
+                chkOptionAnswerB.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("C")){
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("D")){
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AB")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AC")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABC")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ACD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABCD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+       }
        if(currentPostitionQuestion>=exam.getQuantity()) btnNextQuestion.setVisible(false);
     }
     private void btnPrevQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevQuestionActionPerformed
         System.out.println("total"+listQuestion.size()+"---"+currentPostitionQuestion);
         // load question prev 
         try {
-              currentPostitionQuestion=currentPostitionQuestion-1;
-        txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion));
-        getQuestionFromArray(currentPostitionQuestion);
-        if(currentPostitionQuestion<=1) btnPrevQuestion.setVisible(false);
-        if(currentPostitionQuestion<listQuestion.size()) btnNextQuestion.setVisible(true); 
-       flag=2;
+            currentPostitionQuestion=currentPostitionQuestion-1;
+            txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion));
+            getQuestionFromArray(currentPostitionQuestion);
+            if(currentPostitionQuestion<=1) btnPrevQuestion.setVisible(false);
+            if(currentPostitionQuestion<listQuestion.size()) btnNextQuestion.setVisible(true); 
+            flag=2;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -627,6 +788,10 @@ public class CreateExam extends javax.swing.JPanel {
         txtOptionAnswerB.setSelected(false);
         txtOptionAnswerC.setSelected(false);
         txtOptionAnswerD.setSelected(false);
+        chkOptionAnswerA.setSelected(false);
+        chkOptionAnswerB.setSelected(false);
+        chkOptionAnswerC.setSelected(false);
+        chkOptionAnswerD.setSelected(false);
         txtAnswerA.setText("");
         txtAnswerB.setText("");
         txtAnswerC.setText("");
@@ -639,19 +804,18 @@ public class CreateExam extends javax.swing.JPanel {
     private void btnNextQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextQuestionActionPerformed
 //       System.out.println("total"+listQuestion.size()+"---"+currentPostitionQuestion);
         // this.currentPostitionQuestion=currentPostitionQuestion+1;// current luôn đi truoc1 hay sao.        
-        if(currentPostitionQuestion<exam.getQuantity()){
-             flag=1;
+       if(currentPostitionQuestion<exam.getQuantity()){
+            flag=1;
         // validate
-       
-     
-      if (currentPostitionQuestion<listQuestion.size()) {
-          currentPostitionQuestion=currentPostitionQuestion+1;
-          getQuestionFromArray(currentPostitionQuestion);
-      }      
-      else  {
-          clearField();
-            txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion+1));
-      }
+            if (currentPostitionQuestion<listQuestion.size()) {
+                System.out.println("CAN NEXT");
+                currentPostitionQuestion=currentPostitionQuestion+1;
+                getQuestionFromArray(currentPostitionQuestion);
+            }      
+            else  {
+                clearField();
+                txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion+1));
+            }
         }
         else btnNextQuestion.setVisible(false);
           txtSerialQuestion.setText(String.valueOf(currentPostitionQuestion));
@@ -663,13 +827,17 @@ public class CreateExam extends javax.swing.JPanel {
     }//GEN-LAST:event_btnNextQuestionActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-         StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
             ValidatorBLL.checkEmpty(txtQuestion, sb, "Câu hỏi còn trống!");
             ValidatorBLL.checkEmpty(txtAnswerA, sb, "Đáp án A còn trống!");
             ValidatorBLL.checkEmpty(txtAnswerB, sb, "Đáp án B còn trống!");
             ValidatorBLL.checkEmpty(txtAnswerC, sb, "Đáp án C còn trống!");
             ValidatorBLL.checkEmpty(txtAnswerD, sb, "Đáp án D còn trống!");
-            ValidatorBLL.checkEmpty(txtOptionAnswerA,txtOptionAnswerB,txtOptionAnswerC,txtOptionAnswerD, sb, "Đáp án đúng còn trống!");
+            if(cbbAnswer.getSelectedItem().toString().equals("Một đáp án")){
+                ValidatorBLL.checkEmpty(txtOptionAnswerA,txtOptionAnswerB,txtOptionAnswerC,txtOptionAnswerD, sb, "Đáp án đúng còn trống!");
+            } else {
+                ValidatorBLL.checkEmpty(chkOptionAnswerA,chkOptionAnswerB,chkOptionAnswerC,chkOptionAnswerD, sb, "Đáp án đúng còn trống!");
+            }
             if (sb.length() > 0) {
                 JOptionPane.showMessageDialog(this, sb.toString(), "Thông Báo Lỗi", JOptionPane.ERROR_MESSAGE);
                 return;
@@ -680,6 +848,28 @@ public class CreateExam extends javax.swing.JPanel {
        if(listQuestion.size()==exam.getQuantity()) btnNextQuestion.setVisible(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void cbbAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbAnswerActionPerformed
+        if(cbbAnswer.getSelectedItem().toString().equals("Một đáp án")){
+            txtOptionAnswerA.setVisible(true);
+            txtOptionAnswerB.setVisible(true);
+            txtOptionAnswerC.setVisible(true);
+            txtOptionAnswerD.setVisible(true);
+            chkOptionAnswerA.setVisible(false);
+            chkOptionAnswerB.setVisible(false);
+            chkOptionAnswerC.setVisible(false);
+            chkOptionAnswerD.setVisible(false);
+        } else {
+            txtOptionAnswerA.setVisible(false);
+            txtOptionAnswerB.setVisible(false);
+            txtOptionAnswerC.setVisible(false);
+            txtOptionAnswerD.setVisible(false);
+            chkOptionAnswerA.setVisible(true);
+            chkOptionAnswerB.setVisible(true);
+            chkOptionAnswerC.setVisible(true);
+            chkOptionAnswerD.setVisible(true);
+        }
+    }//GEN-LAST:event_cbbAnswerActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel HEADER;
@@ -687,6 +877,11 @@ public class CreateExam extends javax.swing.JPanel {
     private javax.swing.JButton btnNextQuestion;
     private javax.swing.JButton btnPrevQuestion;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<String> cbbAnswer;
+    private javax.swing.JCheckBox chkOptionAnswerA;
+    private javax.swing.JCheckBox chkOptionAnswerB;
+    private javax.swing.JCheckBox chkOptionAnswerC;
+    private javax.swing.JCheckBox chkOptionAnswerD;
     private javax.swing.ButtonGroup groupAnswer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -694,6 +889,7 @@ public class CreateExam extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

@@ -160,8 +160,10 @@ public class navItem extends JPanel implements MouseListener{
 
     @Override
     public void mouseExited(MouseEvent e){
+        System.out.println("THOAT");
         if(!active)
         {
+            System.out.println("EXIT");
             setBackground(normal);
             icon.setIcon(new ImageIcon("./src/main/java/CLIENT/UI/img/"+img));
         }

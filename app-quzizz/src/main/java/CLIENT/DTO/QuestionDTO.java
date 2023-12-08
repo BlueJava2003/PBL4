@@ -29,4 +29,5 @@ public class QuestionDTO {
     private String C;
     private String D;
     private String answer;
+    private Integer type;
 }

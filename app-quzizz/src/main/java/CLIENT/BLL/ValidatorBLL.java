@@ -67,6 +67,24 @@ public class ValidatorBLL {
         return ok;
     }
     
+    public static boolean checkEmpty(JCheckBox rd1,JCheckBox rd2,JCheckBox rd3,JCheckBox rd4, StringBuilder sb,String msg){
+        boolean ok=true;
+        if(!rd1.isSelected() && !rd2.isSelected() && !rd3.isSelected() && !rd4.isSelected()){
+            sb.append(msg).append("\n");
+            rd1.setBackground(Color.yellow);
+            rd2.setBackground(Color.yellow);
+            rd3.setBackground(Color.yellow);
+            rd4.setBackground(Color.yellow);
+            ok=false;
+        }else{
+            rd1.setBackground(Color.white);
+            rd2.setBackground(Color.white);
+             rd3.setBackground(Color.white);
+            rd4.setBackground(Color.white);
+        }
+        return ok;
+    }
+    
      public static boolean checkNumber(JTextField field, StringBuilder sb,String msg) throws Exception {
         boolean ok=true;
         Pattern p = Pattern.compile(" /^\\d+$/");
