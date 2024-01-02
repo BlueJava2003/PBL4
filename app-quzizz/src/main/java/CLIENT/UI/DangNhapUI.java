@@ -31,6 +31,7 @@ public class DangNhapUI extends javax.swing.JFrame {
      */
     private UserBLL userBLL = new UserBLL();
     public static Gson gson = new Gson();
+    private static int DEFAULT_HEIGHT = 750,DEFALUT_WIDTH = 1290 ;
     public DangNhapUI() throws IOException, NoSuchAlgorithmException {
         initComponents();
         setLocationRelativeTo(null);
@@ -266,7 +267,11 @@ public class DangNhapUI extends javax.swing.JFrame {
 
                 if (res.getStatus()==200) {
                     UserDTO userLogin = gson.fromJson(res.getResult(), UserDTO.class);
-                    ManageExam mg = new ManageExam(userLogin.getId().toString(), userLogin.getName(), "Exam",userLogin);
+//                    if(userLogin.getStatus() == 2){
+                        ManageExam mg = new ManageExam(userLogin.getId().toString(), userLogin.getName(), "Exam",userLogin);
+//                    } else if(userLogin.getStatus() == 3){
+//                        ChooseExam chooseExam = new ChooseExam(DEFALUT_WIDTH,userLogin);
+//                    }
                     dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, res.getMessage(),

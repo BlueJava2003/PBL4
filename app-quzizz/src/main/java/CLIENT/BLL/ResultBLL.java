@@ -33,6 +33,16 @@ public class ResultBLL {
         listResults= gson.fromJson(listData.getResult(), listType);
         return listResults;
     }
+    
+    public  ArrayList<ResultDTO> loadDSResultByUser(int examID, int userID) throws Exception {
+        Gson gson = new Gson();
+        if(listResults==null) listResults = new ArrayList<>();
+        ResponseDTO listData= Client.CallServer("LOAD_RESULTS_BY_USER",examID+","+userID);
+        Type listType = new TypeToken<ArrayList<ResultDTO>>(){}.getType();
+        // ArrayList<QuestionDTO> temp=gson.fromJson(listData, listType);
+        listResults= gson.fromJson(listData.getResult(), listType);
+        return listResults;
+    }
 
 
     public int addEResult(ResultDTO re) throws Exception {

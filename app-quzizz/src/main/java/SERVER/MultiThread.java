@@ -10,6 +10,7 @@ package SERVER;
  */
 
 import CLIENT.DTO.MyExamResult;
+import CLIENT.DTO.StatisticalDetailDTO;
 import SERVER.BLL.ExamBLL;
 import SERVER.BLL.QuestionBLL;
 import SERVER.BLL.ResultBLL;
@@ -155,6 +156,10 @@ public class MultiThread implements Runnable{
                         ResponseDTO listResultDTO = resultBLL.getByExamId(Integer.parseInt(object));
                         Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(listResultDTO), clientKey);
                         break;
+                    case "LOAD_RESULTS_BY_USER":
+                        ResponseDTO listResultDTOO = resultBLL.getByExamIdAndUserId(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]));
+                        Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(listResultDTOO), clientKey);
+                        break;
                     case "GET_USER":
                         ResponseDTO user = userBLL.getByID(Integer.parseInt(object));
                         Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(user), clientKey);
@@ -166,6 +171,10 @@ public class MultiThread implements Runnable{
                     case "STATISTICAL":
                         ResponseDTO statisticalDTO = resultBLL.statistical(Integer.parseInt(object));
                         Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(statisticalDTO), clientKey);
+                        break;
+                    case "STATISTICAL_DETAIL":
+                        ResponseDTO StatisticalDetailDTO = resultBLL.statisticalDetail(Integer.parseInt(object));
+                        Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(StatisticalDetailDTO), clientKey);
                         break;
                     case "LOGIN":
                         ResponseDTO userDTO = userBLL.login(gson.fromJson(object, LoginDTO.class));
@@ -185,7 +194,6 @@ public class MultiThread implements Runnable{
                         Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(examResultDTO), clientKey);
                         break;
                     case "LOAD_EXAM_RESULT":
-                        System.out.println("LOAD_EXAM_RESULT");
                         ResponseDTO listExamResult = examBLL.getExamResultByExamIdAndUserID(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]));
                         Server.multiThreadBus.writeSocket(getClientID(), gson.toJson(listExamResult), clientKey);
                         break;    

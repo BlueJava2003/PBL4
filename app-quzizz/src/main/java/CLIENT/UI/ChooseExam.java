@@ -33,7 +33,7 @@ public class ChooseExam extends javax.swing.JPanel {
     }
 
     public ChooseExam(int width)  {
-         DEFALUT_WIDTH = width;
+        DEFALUT_WIDTH = width;
         initComponents();
         this.setSize(this.DEFALUT_WIDTH - 200, 750);
         initComponents();
@@ -52,17 +52,16 @@ public class ChooseExam extends javax.swing.JPanel {
            lbIconHeader.setIcon(new ImageIcon("./src/main/java/CLIENT/UI/img/icons8-quiz-96.png")); // NOI18N
            lbIMGMain.setIcon(new ImageIcon("./src/main/java/CLIENT/UI/img/icons8-quizizz-150.png"));
      }
-       private void loadDataExam() {
+    private void loadDataExam() {
         try {
-                bllEx.loadDSExam("LOAD_EXAM");
-                ArrayList<ExamDTO> res=ExamBLL.getListExam();
+            bllEx.loadDSExam("LOAD_EXAM");
+            ArrayList<ExamDTO> res=ExamBLL.getListExam();
             insertHeaderExam();
             outModelExam(modelExam, ExamBLL.getListExam());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Không Thể Lấy thông Tin Đề Thi ",
                     "Thông Báo Lỗi", JOptionPane.ERROR_MESSAGE);
         }
-
     }
      private void insertHeaderExam() {
         Vector header = new Vector();

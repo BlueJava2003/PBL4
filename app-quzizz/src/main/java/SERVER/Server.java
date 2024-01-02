@@ -12,7 +12,7 @@ import java.util.concurrent.Executors;
 
 /**
  *
- * @author LE NHAN
+ * @author PHUONG NAM
  */
 public class Server {
 
@@ -44,9 +44,9 @@ public class Server {
             }catch (IOException e) {
                 System.err.println(e);
                 System.out.println("Server closed connection");
-                    //Đóng kết nối
-                    socket.close();
-                    server.close();
+                //Đóng kết nối
+                socket.close();
+                server.close();
             }
         } catch (IOException e) { System.err.println(e); }
     }

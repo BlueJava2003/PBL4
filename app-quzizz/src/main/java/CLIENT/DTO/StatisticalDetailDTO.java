@@ -4,30 +4,25 @@
  */
 package CLIENT.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 /**
  *
- * @author ThuanVo
+ * @author PC
  */
-
-@ToString
-@Getter 
-@Setter 
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExamDTO extends Object {
-    private Integer id;
-    private int userID;
-    private String subject;
-    private String class_room;
-    private Integer quantity;
-    private int status;
-    private Integer total_time;
+@ToString
+public class StatisticalDetailDTO {
+    private int exam_id;
+    private int user_id;
+    private String exam_name;
+    private String user_name;
+    private float score;
 }

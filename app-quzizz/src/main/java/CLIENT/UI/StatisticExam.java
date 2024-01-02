@@ -7,6 +7,7 @@ package CLIENT.UI;
 import CLIENT.BLL.ExamBLL;
 import CLIENT.DTO.ExamDTO;
 import CLIENT.DTO.StatisticalDTO;
+import CLIENT.DTO.StatisticalDetailDTO;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,8 @@ public class StatisticExam extends javax.swing.JPanel {
 
      private int DEFALUT_WIDTH;
      private ExamBLL bllEx=new ExamBLL();
-      private DefaultTableModel modelExam;
+     private DefaultTableModel modelExam;
+     private DefaultTableModel modelStDetail;
     public StatisticExam() {
           this.setSize(1090, 750);
         initComponents();
@@ -52,6 +54,33 @@ public class StatisticExam extends javax.swing.JPanel {
         //if (model.getRowCount()==0)
         modelExam = new DefaultTableModel(header, 0);
     }
+     
+     private void insertHeaderStatisticalDetail() {
+        Vector header = new Vector();
+        header.add("Mã đề thi");
+        header.add("Mã thí sinh");
+        header.add("Tên Đề thi");
+        header.add("Tên thí sinh");
+        header.add("Điểm số");
+        //if (model.getRowCount()==0)
+        modelStDetail = new DefaultTableModel(header, 0);
+    }
+      private void outStatisticalDetail(DefaultTableModel model, ArrayList<StatisticalDetailDTO> courseinstructor) // Xuất ra Table từ ArrayList
+    {
+        Vector data;
+        model.setRowCount(0);
+        for (StatisticalDetailDTO ex : courseinstructor) {
+            data = new Vector();
+            data.add(ex.getExam_id());
+            data.add(ex.getUser_id());
+            data.add(ex.getExam_name());
+            data.add(ex.getUser_name());
+            data.add(ex.getScore());
+            model.addRow(data);
+        }
+        tbExamDetail.setModel(model);
+    }
+      
       private void outModelExam(DefaultTableModel model, ArrayList<ExamDTO> courseinstructor) // Xuất ra Table từ ArrayList
     {
         Vector data;
@@ -75,8 +104,8 @@ public class StatisticExam extends javax.swing.JPanel {
     
     private void loadDataExam() {
         try {
-                 bllEx.loadDSExam("LOAD_EXAM");
-                ArrayList<ExamDTO> res=ExamBLL.getListExam();
+            bllEx.loadDSExam("LOAD_EXAM");
+            ArrayList<ExamDTO> res= ExamBLL.getListExam();
             insertHeaderExam();
             outModelExam(modelExam, ExamBLL.getListExam());
         } catch (Exception e) {
@@ -93,7 +122,6 @@ public class StatisticExam extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbExam = new javax.swing.JTable();
@@ -107,13 +135,13 @@ public class StatisticExam extends javax.swing.JPanel {
         lbMax = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbImg = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbExamDetail = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(7, 7, 14));
-
-        jLabel1.setBackground(new java.awt.Color(29, 182, 242));
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(29, 182, 242));
-        jLabel1.setText("THỐNG KÊ");
 
         jPanel1.setBackground(new java.awt.Color(6, 16, 16));
 
@@ -143,7 +171,7 @@ public class StatisticExam extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(242, 210, 2));
-        jLabel2.setText("Số Người Thi :");
+        jLabel2.setText("Số Lượt Thi :");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(242, 210, 2));
@@ -177,21 +205,19 @@ public class StatisticExam extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(6, 6, 6))
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbAmountUser, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbMax, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbMin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -223,13 +249,45 @@ public class StatisticExam extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
 
+        tbExamDetail.setBackground(new java.awt.Color(204, 204, 204));
+        tbExamDetail.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        tbExamDetail.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tbExamDetail.setMaximumSize(new java.awt.Dimension(2147483647, 120));
+        tbExamDetail.setMinimumSize(new java.awt.Dimension(60, 120));
+        tbExamDetail.setPreferredSize(new java.awt.Dimension(300, 120));
+        tbExamDetail.setRowHeight(30);
+        tbExamDetail.setSelectionBackground(new java.awt.Color(48, 130, 214));
+        jScrollPane2.setViewportView(tbExamDetail);
+
+        jLabel1.setBackground(new java.awt.Color(29, 182, 242));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(29, 182, 242));
+        jLabel1.setText("CHI TIẾT KẾT QUẢ ĐỀ THI");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 413, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,34 +299,62 @@ public class StatisticExam extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(144, 144, 144)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addGap(7, 7, 7)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lbImg, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        jLabel5.setBackground(new java.awt.Color(29, 182, 242));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(29, 182, 242));
+        jLabel5.setText("THỐNG KÊ ĐỀ THI");
+
+        jLabel6.setBackground(new java.awt.Color(29, 182, 242));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(29, 182, 242));
+        jLabel6.setText("DANH SÁCH ĐỀ THI");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(477, 477, 477))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(618, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addGap(310, 310, 310)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(732, Short.MAX_VALUE)))
         );
 
         getAccessibleContext().setAccessibleName("");
@@ -284,6 +370,12 @@ public class StatisticExam extends javax.swing.JPanel {
                 lbAverage.setText(String.valueOf(Math.ceil(statistical.getAvgScore()*10)/10));
                 lbMax.setText(String.valueOf(Math.ceil(statistical.getMaxScore()*10)/10));
                 lbMin.setText(String.valueOf(Math.ceil(statistical.getMinScore()*10)/10));
+                
+                ArrayList<StatisticalDetailDTO> stDetail = bllEx.statisticExamDetail(id);
+                stDetail.forEach(s -> System.out.println(s));
+                insertHeaderStatisticalDetail();
+                outStatisticalDetail(modelStDetail, stDetail);
+                
             }
             catch(Exception e){
                 JOptionPane.showMessageDialog(this, "Thông báo","Không có số liệu thống kê!",JOptionPane.INFORMATION_MESSAGE);
@@ -300,15 +392,19 @@ public class StatisticExam extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbAmountUser;
     private javax.swing.JLabel lbAverage;
     private javax.swing.JLabel lbImg;
     private javax.swing.JLabel lbMax;
     private javax.swing.JLabel lbMin;
     private javax.swing.JTable tbExam;
+    private javax.swing.JTable tbExamDetail;
     // End of variables declaration//GEN-END:variables
 }

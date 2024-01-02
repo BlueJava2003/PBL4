@@ -1104,11 +1104,9 @@ public class TakeExam extends javax.swing.JPanel {
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
        //timer.stop();
         // check đã hoàn thành bài thi
-        System.out.println("CO VAO NUT EXIT");
-        int confirm = JOptionPane.showConfirmDialog(null, "Kết Quả Bài Thi Sẽ Không Được Lưu. Bạn Thực Sụ Muốn Thoát ?",
+        int confirm = JOptionPane.showConfirmDialog(null, "Bạn Thực Sụ Muốn Thoát ?",
                 "Cảnh Báo", JOptionPane.YES_NO_OPTION);
-        System.out.println("CONFIRM: " + confirm);
-        if (confirm == 0) {
+        if (confirm == 1) {
             clearTakeExam();
             ManageExam.openChooenExamPanel(user);
         } else {
@@ -1116,7 +1114,6 @@ public class TakeExam extends javax.swing.JPanel {
             myresult.setPoint((float) Math.round(((correct_num * 10) / this.amount_Question) * 10) / 10);
             myresult.setTime_doing((exam.getTotal_time() * 60000) - TimeExam);
             if(listEx1 != null && !listEx1.isEmpty()){
-                System.out.println("CO VAO DAY");
                 myresult.setTime_doing((exam.getTotal_time() * 60000) - TimeExam + listEx1.get(0).getTime_doing());
             }
             myresult.setPosition(positionQuetion);

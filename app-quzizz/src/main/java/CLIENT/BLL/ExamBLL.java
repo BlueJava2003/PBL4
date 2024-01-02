@@ -8,6 +8,7 @@ import CLIENT.Client;
 import CLIENT.DTO.ExamDTO;
 import CLIENT.DTO.ResponseDTO;
 import CLIENT.DTO.StatisticalDTO;
+import CLIENT.DTO.StatisticalDetailDTO;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,6 +34,7 @@ public class ExamBLL {
 
     public ExamBLL(){}
 
+    
     public static ArrayList<ExamDTO> getListExam() {
         return listExam;
     }
@@ -46,7 +48,7 @@ public class ExamBLL {
     
      public void  loadDSExam(String key ) throws Exception{
         if(listExam==null) listExam = new ArrayList<>();
-        ResponseDTO listData= Client.CallServer(key,"1");
+        ResponseDTO listData= Client.CallServer(key,"LOAD_EXAM");
         Type listType = new TypeToken<ArrayList<ExamDTO>>(){}.getType();
         listExam = gson.fromJson(listData.getResult(), listType);
     }
@@ -126,9 +128,24 @@ public class ExamBLL {
         return null;
     }
     public StatisticalDTO statisticExam(int idExam) throws Exception {
-        ResponseDTO res= Client.CallServer("STATISTICAL",String.valueOf(idExam   ));
-        return gson.fromJson(res.getResult(),StatisticalDTO.class   );
+        ResponseDTO res= Client.CallServer("STATISTICAL",String.valueOf(idExam));
+        return gson.fromJson(res.getResult(),StatisticalDTO.class);
 
     }
+    
+    
+    public ArrayList<StatisticalDetailDTO> statisticExamDetail(int idExam) throws Exception {
+        Gson gson = new Gson();
+        ArrayList<StatisticalDetailDTO> listExamResult = null;
+        if(listExamResult==null) 
+            listExamResult = new ArrayList<>();
+        
+        ResponseDTO listData= Client.CallServer("STATISTICAL_DETAIL", idExam+"");
+        Type listType = new TypeToken<ArrayList<StatisticalDetailDTO>>(){}.getType();
+        // ArrayList<QuestionDTO> temp=gson.fromJson(listData, listType);
+        listExamResult = gson.fromJson(listData.getResult(), listType);
+        return listExamResult;
+    }
+
     
 }

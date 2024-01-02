@@ -4,8 +4,11 @@
  */
 package CLIENT.UI;
 
+import CLIENT.BLL.ResultBLL;
 import CLIENT.DTO.ExamDTO;
+import CLIENT.DTO.ResultDTO;
 import CLIENT.DTO.UserDTO;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -284,7 +287,16 @@ public class BeginExam extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBeginDoingExamActionPerformed(java.awt.event.ActionEvent evt) throws Exception {//GEN-FIRST:event_btnBeginDoingExamActionPerformed
-        ManageExam.openTakeExamPanel(exam,user);
+        // Thêm code chỉ được thi 1 lần
+        ResultBLL reBll = new ResultBLL();
+        ArrayList<ResultDTO> result = reBll.loadDSResultByUser(exam.getId(), user.getId());
+        if(result == null || result.isEmpty()){
+            ManageExam.openTakeExamPanel(exam,user);
+        } else {
+            JOptionPane.showMessageDialog(this, "Bạn đã thi đề này rồi ",
+                    "Thông Báo Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+        //-----------------------------
     }//GEN-LAST:event_btnBeginDoingExamActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt)  {//GEN-FIRST:event_btnBackActionPerformed

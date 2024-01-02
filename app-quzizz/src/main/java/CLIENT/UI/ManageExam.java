@@ -62,7 +62,7 @@ public class ManageExam extends JFrame implements MouseListener {
     }
     public ManageExam() throws Exception
     {
-        Toolkit screen = Toolkit.getDefaultToolkit();
+        Toolkit screen = Toolkit.getDefaultToolkit();   
         init();
         initRole();
          setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -197,7 +197,11 @@ public class ManageExam extends JFrame implements MouseListener {
         main = new JPanel(null);
         main.setBackground(Color.WHITE);
         navObj.get(0).doActive();
-        changeMainInfo(0);
+        if(userGlobal.getStatus() == 2){
+            changeMainInfo(0);
+        } else {
+            changeMainInfo(1);
+        }
 /**************************************************************/   
 
         add(header,BorderLayout.NORTH);
@@ -222,7 +226,7 @@ public class ManageExam extends JFrame implements MouseListener {
     public void navItemBlockManaExam() {
         navItem.add("Thi:ThongKe_20px.png:ThongKe_20px_active.png");
         navItem.add("Người Dùng:KhachHang_20px.png:KhachHang_20px_active.png");
-        navItem.add("Thống Kê:ThongKe_20px.png:ThongKe_20px_active.png");
+        // navItem.add("Thống Kê:ThongKe_20px.png:ThongKe_20px_active.png");
     }
 
     @Override

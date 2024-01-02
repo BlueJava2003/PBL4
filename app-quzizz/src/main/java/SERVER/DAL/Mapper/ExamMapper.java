@@ -24,6 +24,7 @@ public class ExamMapper implements RowMapper<ExamDTO>{
             ex.setClass_room(rs.getNString("class_room"));
             ex.setQuantity(rs.getInt("quantity"));
             ex.setTotal_time(rs.getInt("total_time"));
+            ex.setUserID(rs.getInt("user_id"));
             return ex;
         } catch (SQLException e) {
             return null;

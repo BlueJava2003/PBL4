@@ -4,7 +4,9 @@
  */
 package SERVER.DAL;
 
+import CLIENT.DTO.StatisticalDetailDTO;
 import SERVER.DAL.Mapper.ResultMapper;
+import SERVER.DAL.Mapper.StatisticalDetailMapper;
 import SERVER.DTO.ResultDTO;
 import SERVER.DTO.StatisticalDTO;
 
@@ -28,6 +30,12 @@ public class ResultDAL extends AbstractDAL<ResultDTO> {
         List<ResultDTO> temp = result.query(sql, new ResultMapper(), id_exam);
        return temp;
     }
+    
+    public List<ResultDTO> getByExamIdAndUserId(int id_exam, int id_user){
+        String  sql = "SELECT * FROM `results` WHERE exam_id = ? and user_id = ?";
+        List<ResultDTO> temp = result.query(sql, new ResultMapper(), id_exam, id_user);
+        return temp;
+    }
 
     public ResultDTO getRank(int id_exam, int user_id) {
         String  sql = "SELECT RANK() OVER(ORDER BY score asc) AS Rank FROM `results` WHERE user_id= ? AND exam_id= ?";
@@ -50,6 +58,18 @@ public class ResultDAL extends AbstractDAL<ResultDTO> {
 
         return new StatisticalDTO(totalUser,maxScore,minScore,avgScore);
     }
+    
+    public List<StatisticalDetailDTO> statisticalDetail(int id_exam) {
+        String sql = "Select results.*, users.name, exams.subject\n"
+                + "FROM results\n"
+                + "JOIN exams\n"
+                + "ON results.exam_id = exams.id\n"
+                + "JOIN users \n"
+                + "ON results.user_id = users.id\n"
+                + "WHERE results.exam_id = ?";
+        return query(sql, new StatisticalDetailMapper(), id_exam);   
+    }
+    
 
     public StatisticalDTO statisticalServer(int id_exam) {
         String totalUserSql = "SELECT COUNT(*) FROM RESULTS";
