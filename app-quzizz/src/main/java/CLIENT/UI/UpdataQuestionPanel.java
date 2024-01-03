@@ -33,21 +33,90 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
      private void setInfo(){
+         if(question.getType() == 1){
+            txtOptionAnswerA.setVisible(true);
+            txtOptionAnswerB.setVisible(true);
+            txtOptionAnswerC.setVisible(true);
+            txtOptionAnswerD.setVisible(true);
+            chkOptionAnswerA.setVisible(false);
+            chkOptionAnswerB.setVisible(false);
+            chkOptionAnswerC.setVisible(false);
+            chkOptionAnswerD.setVisible(false);
+        } else {
+            txtOptionAnswerA.setVisible(false);
+            txtOptionAnswerB.setVisible(false);
+            txtOptionAnswerC.setVisible(false);
+            txtOptionAnswerD.setVisible(false);
+            chkOptionAnswerA.setVisible(true);
+            chkOptionAnswerB.setVisible(true);
+            chkOptionAnswerC.setVisible(true);
+            chkOptionAnswerD.setVisible(true);
+        }
+         
         // txtSerialQuestion.setText(String.valueOf(question.getId()));
          txtQuestion.setText(question.getQuestion());
          txtAnswerA.setText(question.getA());
          txtAnswerB.setText(question.getB());
          txtAnswerC.setText(question.getC());
          txtAnswerD.setText(question.getD());
+         System.out.println("TYPE: " + question.getType());
          String answer = question.getAnswer();
-         if (answer.equalsIgnoreCase("A"))
-             txtOptionAnswerA.setSelected(true);
-         else if (answer.equalsIgnoreCase("B"))
-             txtOptionAnswerB.setSelected(true);
-         else if (answer.equalsIgnoreCase("C"))
-             txtOptionAnswerC.setSelected(true);
-         else
-             txtOptionAnswerD.setSelected(true);
+         if(question.getType() == 1){   
+        if (answer.equalsIgnoreCase("A"))
+            txtOptionAnswerA.setSelected(true);
+        else if (answer.equalsIgnoreCase("B"))
+            txtOptionAnswerB.setSelected(true);
+        else if (answer.equalsIgnoreCase("C"))
+            txtOptionAnswerC.setSelected(true);
+        else
+            txtOptionAnswerD.setSelected(true);
+       } else {
+            if(answer.equalsIgnoreCase("A")){
+                chkOptionAnswerA.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("B")){
+                chkOptionAnswerB.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("C")){
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("D")){
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AB")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AC")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("AD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABC")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ACD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+            if(answer.equalsIgnoreCase("ABCD")){
+                chkOptionAnswerA.setSelected(true);
+                chkOptionAnswerB.setSelected(true);
+                chkOptionAnswerC.setSelected(true);
+                chkOptionAnswerD.setSelected(true);
+            }
+       }
      }
 
     /**
@@ -79,6 +148,12 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtQuestion = new javax.swing.JTextPane();
         pInput4 = new javax.swing.JPanel();
+        cbbAnswer = new javax.swing.JComboBox<>();
+        chkOptionAnswerA = new javax.swing.JCheckBox();
+        chkOptionAnswerB = new javax.swing.JCheckBox();
+        chkOptionAnswerC = new javax.swing.JCheckBox();
+        chkOptionAnswerD = new javax.swing.JCheckBox();
+        jLabel15 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -185,11 +260,33 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
             .addGap(0, 64, Short.MAX_VALUE)
         );
 
+        cbbAnswer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Một đáp án", "Nhiều đáp án" }));
+        cbbAnswer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbAnswerActionPerformed(evt);
+            }
+        });
+
+        chkOptionAnswerA.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerA.setText("A");
+
+        chkOptionAnswerB.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerB.setText("B");
+
+        chkOptionAnswerC.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerC.setText("C");
+
+        chkOptionAnswerD.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chkOptionAnswerD.setText("D");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel15.setText("Loại câu hỏi");
+
         javax.swing.GroupLayout pInputLayout = new javax.swing.GroupLayout(pInput);
         pInput.setLayout(pInputLayout);
         pInputLayout.setHorizontalGroup(
             pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
+            .addGroup(pInputLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -204,24 +301,39 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pInputLayout.createSequentialGroup()
                                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtAnswerA, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
-                                    .addComponent(txtAnswerB)
                                     .addComponent(txtAnswerC)
-                                    .addComponent(txtAnswerD))
-                                .addGap(38, 38, 38)
-                                .addComponent(jLabel3)
-                                .addGap(32, 32, 32)
+                                    .addComponent(txtAnswerD)
+                                    .addComponent(txtAnswerB))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtOptionAnswerA)
-                                    .addComponent(txtOptionAnswerB)
+                                    .addComponent(jLabel15)
+                                    .addComponent(cbbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(51, 51, 51)
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pInputLayout.createSequentialGroup()
-                                        .addComponent(txtOptionAnswerD)
-                                        .addGap(18, 18, 18)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtOptionAnswerA)
+                                                .addComponent(txtOptionAnswerB)
+                                                .addComponent(txtOptionAnswerC, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addComponent(txtOptionAnswerD, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(chkOptionAnswerC)
+                                            .addGroup(pInputLayout.createSequentialGroup()
+                                                .addGap(1, 1, 1)
+                                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(chkOptionAnswerA)
+                                                    .addComponent(chkOptionAnswerB)
+                                                    .addComponent(chkOptionAnswerD))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(txtOptionAnswerC)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 701, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jLabel3))))))
+                .addContainerGap())
         );
         pInputLayout.setVerticalGroup(
             pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,38 +346,59 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
                         .addGap(30, 30, 30)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pInputLayout.createSequentialGroup()
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel1))
-                        .addGap(20, 20, 20)
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addGap(20, 20, 20)
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txtAnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtOptionAnswerC)))
-                        .addGap(20, 20, 20)
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtOptionAnswerD))
-                        .addGap(50, 50, 50))
-                    .addGroup(pInputLayout.createSequentialGroup()
-                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pInputLayout.createSequentialGroup()
-                                .addComponent(txtOptionAnswerA)
-                                .addGap(23, 23, 23)
-                                .addComponent(txtOptionAnswerB))
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
                         .addComponent(pInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32))))
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pInputLayout.createSequentialGroup()
+                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(pInputLayout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(5, 5, 5)
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addGap(98, 98, 98)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(chkOptionAnswerC)
+                                            .addComponent(txtOptionAnswerC))
+                                        .addGap(16, 16, 16)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(chkOptionAnswerD)
+                                            .addComponent(txtOptionAnswerD)))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(chkOptionAnswerA)
+                                        .addGap(23, 23, 23)
+                                        .addComponent(chkOptionAnswerB))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(txtOptionAnswerA)
+                                        .addGap(23, 23, 23)
+                                        .addComponent(txtOptionAnswerB)))
+                                .addGap(5, 5, 5))
+                            .addGroup(pInputLayout.createSequentialGroup()
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtAnswerA, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel1))
+                                        .addGap(20, 20, 20)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtAnswerB, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel5))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                        .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(txtAnswerC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(20, 20, 20))
+                                    .addGroup(pInputLayout.createSequentialGroup()
+                                        .addComponent(jLabel15)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbbAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(pInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtAnswerD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7))))
+                        .addGap(50, 50, 50))))
         );
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
@@ -411,6 +544,28 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
+    private void cbbAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbAnswerActionPerformed
+        if(cbbAnswer.getSelectedItem().toString().equals("Một đáp án")){
+            txtOptionAnswerA.setVisible(true);
+            txtOptionAnswerB.setVisible(true);
+            txtOptionAnswerC.setVisible(true);
+            txtOptionAnswerD.setVisible(true);
+            chkOptionAnswerA.setVisible(false);
+            chkOptionAnswerB.setVisible(false);
+            chkOptionAnswerC.setVisible(false);
+            chkOptionAnswerD.setVisible(false);
+        } else {
+            txtOptionAnswerA.setVisible(false);
+            txtOptionAnswerB.setVisible(false);
+            txtOptionAnswerC.setVisible(false);
+            txtOptionAnswerD.setVisible(false);
+            chkOptionAnswerA.setVisible(true);
+            chkOptionAnswerB.setVisible(true);
+            chkOptionAnswerC.setVisible(true);
+            chkOptionAnswerD.setVisible(true);
+        }
+    }//GEN-LAST:event_cbbAnswerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -457,7 +612,13 @@ public class UpdataQuestionPanel extends javax.swing.JDialog {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSave;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox<String> cbbAnswer;
+    private javax.swing.JCheckBox chkOptionAnswerA;
+    private javax.swing.JCheckBox chkOptionAnswerB;
+    private javax.swing.JCheckBox chkOptionAnswerC;
+    private javax.swing.JCheckBox chkOptionAnswerD;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

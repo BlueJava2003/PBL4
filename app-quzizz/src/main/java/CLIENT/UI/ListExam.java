@@ -75,6 +75,7 @@ public class ListExam extends javax.swing.JPanel {
         header.add("C");
         header.add("D");
         header.add("Ans");
+        header.add("Type");
         //if (model.getRowCount()==0)
         modelQuestion = new DefaultTableModel(header, 0);
     }
@@ -90,7 +91,6 @@ public class ListExam extends javax.swing.JPanel {
             data.add(ex.getClass_room());
             data.add(ex.getQuantity());
             data.add(ex.getTotal_time());
-
             model.addRow(data);
         }
         tbExam.setModel(model);
@@ -109,6 +109,7 @@ public class ListExam extends javax.swing.JPanel {
             data.add(qs.getC());
             data.add(qs.getD());
             data.add(qs.getAnswer());
+            data.add(qs.getType());
             model.addRow(data);
         }
         tbQuestion.setModel(model);
@@ -753,7 +754,7 @@ public class ListExam extends javax.swing.JPanel {
             questionEdit.setC(tbQuestion.getModel().getValueAt(i, 4).toString());
             questionEdit.setD(tbQuestion.getModel().getValueAt(i, 5).toString());
             questionEdit.setAnswer(tbQuestion.getModel().getValueAt(i, 6).toString());
-            
+            questionEdit.setType(Integer.parseInt(tbQuestion.getModel().getValueAt(i, 7).toString()));
         }
     }//GEN-LAST:event_tbQuestionMouseClicked
 

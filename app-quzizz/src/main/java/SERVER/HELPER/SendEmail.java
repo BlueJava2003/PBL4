@@ -25,9 +25,9 @@ public class SendEmail {
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-        String email = "lenhandeveloper@gmail.com";
+        String email = "tphuongnam98@gmail.com";
         //xhvitnnifhxwdwpw
-        String password = "pijpszumoozohkce";
+        String password = "jmwuiiolyhiyuckt";
         Session session = Session.getInstance(prop, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -105,7 +105,7 @@ public class SendEmail {
         return hashPassWord.equals(myChecksum);
     }
     public static void main(String args[]) throws Exception{
-        sendMail("lenhan0029@gmail.com");
+        sendMail("tphuongnam98@gmail.com");
     }
     
 }

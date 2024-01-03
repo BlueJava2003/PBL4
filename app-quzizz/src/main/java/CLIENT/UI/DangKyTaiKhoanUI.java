@@ -368,7 +368,7 @@ public class DangKyTaiKhoanUI extends javax.swing.JFrame {
             user.setPassword(pass);
             user.setBirthday(birthday);
             user.setGender(gender);
-            user.setStatus(0);
+            user.setStatus(3);
             user.setRole("0");
             // verifi email
             String res = userBLL.addUser(user);

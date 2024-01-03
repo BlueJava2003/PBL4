@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author Thuan
+ *
  */
 public class UserDAL extends AbstractDAL<UserDTO> {
 
@@ -75,7 +75,7 @@ public class UserDAL extends AbstractDAL<UserDTO> {
     }
 
     public void active(int userId) throws FileNotFoundException {
-        StringBuilder sql = new StringBuilder("UPDATE users SET status =1, otp = null, otp_create_time =null ");
+        StringBuilder sql = new StringBuilder("UPDATE users SET status = 3, otp = null, otp_create_time = null ");
         sql.append("WHERE id = ?");
         update(sql.toString(),userId);
     }

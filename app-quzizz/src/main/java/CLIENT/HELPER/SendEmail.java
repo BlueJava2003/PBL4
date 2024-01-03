@@ -27,7 +27,7 @@ public class SendEmail {
         properties.put("mail.smtp.port", "587");
         String email = recipient;
         //xhvitnnifhxwdwpw
-        String password = "xhvitnnifhxwdwpw";
+        String password = "jmwuiiolyhiyuckt";
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
