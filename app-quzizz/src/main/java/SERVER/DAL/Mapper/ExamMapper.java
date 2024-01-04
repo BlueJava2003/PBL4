@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author ThuanVo
+ * @author 
  */
 public class ExamMapper implements RowMapper<ExamDTO>{
 

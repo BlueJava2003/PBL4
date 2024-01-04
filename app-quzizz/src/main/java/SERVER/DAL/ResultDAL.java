@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Thuan
+ * @author 
  */
 public class ResultDAL extends AbstractDAL<ResultDTO> {
     private static ResultDAL result = new ResultDAL();

@@ -9,7 +9,7 @@ import java.util.List;
 
     /**
      *
-     * @author thuanvo
+     *
      */
     public class MultiThreadBus {
         static List<MultiThread> listServerThreads;

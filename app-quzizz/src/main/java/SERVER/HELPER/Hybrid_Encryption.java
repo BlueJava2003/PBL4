@@ -17,7 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
- * @author thuanvo
+ *
  */
 public class Hybrid_Encryption {
     private static String encode(byte[] data) {

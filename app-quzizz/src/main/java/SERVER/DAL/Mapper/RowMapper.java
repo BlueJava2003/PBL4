@@ -6,7 +6,7 @@ package SERVER.DAL.Mapper;
 
 /**
  *
- * @author ThuanVo
+ * @author 
  */
 import java.sql.ResultSet;
 

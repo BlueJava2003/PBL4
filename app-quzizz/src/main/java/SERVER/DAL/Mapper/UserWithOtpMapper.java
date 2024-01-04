@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author LE NHAN
+ * @author 
  */
 public class UserWithOtpMapper implements RowMapper<UserWithOtpDTO>{
     @Override

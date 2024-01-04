@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author Thuan
+ * @author
  */
 public class ExamDAL extends AbstractDAL<ExamDTO> {
 

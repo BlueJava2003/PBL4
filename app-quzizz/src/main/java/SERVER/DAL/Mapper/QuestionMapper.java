@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author ThuanVo
+ * @author 
  */
 public class QuestionMapper implements RowMapper<QuestionDTO>{
 

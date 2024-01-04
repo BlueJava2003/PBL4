@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author ThuanVo
+ * @author 
  */
 public class QuestionDAL extends AbstractDAL<QuestionDTO> {
 

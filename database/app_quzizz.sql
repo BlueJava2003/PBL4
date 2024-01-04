@@ -161,12 +161,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `name`, `status`, `gender`, `bir
 (5, 'bdiss4@ucoz.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Bobina', 4, 1, '2022-12-07 22:35:20', 0, NULL, NULL),
 (6, 'tambrogio5@macromedia.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Tamara', 0, 1, '2022-11-30 13:44:36', 0, NULL, NULL),
 (7, 'erist6@sun.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Etty', 0, 0, '2022-11-30 13:44:36', 0, NULL, NULL),
-(9, 'aproback8@deliciousdays.com', 'e06bf3201dacb9f9ae2e8efb51a2339d18017fbe445d316f48669bdd68aa6cd8', 'Athene', 0, 0, '0000-00-00 00:00:00', 0, NULL, NULL),
-(22, 'taolavuag@gmail.com', '$2a$09$g7ELO8kWTV6lquGOCKmQeeKYN.ao8JtAT3rat7vp9xuW46j0qfb7O', 'Kim Ngân', 1, 1, '2023-10-31 15:05:43', 0, NULL, NULL),
-(31, 'tanthuanleteo@gmail.com', '$2a$09$BolldvZUnKd5ddh.oT8gluwNMoZS4UtHILCAUxrlZJ7yV5QhXfgh2', 'Tân Thuận Hồ \" #', 3, 1, '2023-10-31 15:05:10', 0, '879540', '2022-12-08 10:52:46'),
-(32, 'baotrung6868@gmail.com', '$2a$09$AWnSf0aJpISravyA98MlAOMMrzrTMwtgxXIdNbBusycg60sSfRzFG', 'Lê Văn Nam Xì', 1, 1, '2023-10-31 15:04:56', 0, NULL, NULL),
-(34, 'killerindarkness@gmail.com', '$2a$09$c1ogbpqU4nE5HF4rcmZQKe7ixtEj0nhdOwZhm0z/MCmJrvq6X5UCW', 'Nguyen Van Teo A Lủ', 1, 1, '2023-10-31 15:04:28', 0, NULL, NULL),
-(36, 'kingof256darkness@gmail.com', '$2a$09$lUlXqi/w.J8BNs/9m1RH5eydi5EVuWlhkmfT64Bqeb/5MJ775Fpyu', 'Teo', 1, 1, '2023-10-31 15:04:41', 0, NULL, NULL);
+(9, 'aproback8@deliciousdays.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Athene', 0, 0, '2022-11-30 13:44:36', 0, NULL, NULL),
+(22, 'taolavuag@gmail.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Kim Ngân', 1, 1, '2023-10-31 15:05:43', 0, NULL, NULL),
+(31, 'tanthuanleteo@gmail.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Tân Thuận Hồ \" #', 3, 1, '2023-10-31 15:05:10', 0, '879540', '2022-12-08 10:52:46'),
+(32, 'baotrung6868@gmail.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Lê Văn Nam Xì', 1, 1, '2023-10-31 15:04:56', 0, NULL, NULL),
+(34, 'killerindarkness@gmail.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Nguyen Van Teo A Lủ', 1, 1, '2023-10-31 15:04:28', 0, NULL, NULL),
+(36, 'kingof256darkness@gmail.com', '$2a$12$2NedCPpQh8VtQcKSPa3Oiuz.PXQMeIzUG1Lx9qbG.P9TtwL06BcdW', 'Teo', 1, 1, '2023-10-31 15:04:41', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables

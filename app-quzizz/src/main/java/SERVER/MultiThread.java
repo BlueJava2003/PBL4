@@ -6,7 +6,7 @@ package SERVER;
 
 /**
  *
- * @author TANTHUAN
+ * @author
  */
 
 import CLIENT.DTO.MyExamResult;
